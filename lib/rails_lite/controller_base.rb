@@ -11,7 +11,7 @@ class ControllerBase
   def initialize(req, res, route_params = {})
     @req = req
     @res = res
-    @params = route_params
+    @params = Params.new(req, route_params)
   end
 
   # populate the response with content
@@ -19,8 +19,8 @@ class ControllerBase
   # later raise an error if the developer tries to double render
   def render_content(content, type)
       raise "Don't double render" if already_built_response?
-      res.content_type = type
-      res.body = content
+      @res.content_type = type
+      @res.body = content
       @already_built_response = true
       session.store_session(@res)
   end
@@ -35,7 +35,9 @@ class ControllerBase
     raise "Don't double render" if already_built_response?
     @res.status = 302
     @res.header["location"] = url
+    session.store_session(@res)
     @already_built_response = true
+    nil
   end
 
   # use ERB and binding to evaluate templates
@@ -54,6 +56,7 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
-    self.render(name)
+    self.send(name)
+    render(name) unless already_built_response?
   end
 end
