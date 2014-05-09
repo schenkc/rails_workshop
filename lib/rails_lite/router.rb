@@ -20,8 +20,7 @@ class Route
     
     route_params = {}
     match_data.names.each do |name|
-      name_sym = name.to_sym
-      route_params[name_sym] = match_data[name]
+      route_params[name] = match_data[name]
     end
     @controller_class.new(req, res, route_params).invoke_action(action_name)
   end
