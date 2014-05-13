@@ -1,19 +1,18 @@
-# Using the specs
-Some specs have been written to guide you towards the lite :) There are rspec
-specs in the `spec` directory and ruby code for you to test with in the `test`
-directory.
+Rails Workshop
+===
 
-The specs were written with _you_ in mind ;) Run them in this order they should
-generally follow the progression of the project.
+This project was an exercise (with given specs) to rewrite the inner workings of rails.
 
-## Suggested Order
-0.  `rake spec spec/controller_base_spec.rb`
-0.  `rake spec spec/session_spec.rb`
-0.  `rake spec spec/params_spec.rb`
-0.  `rake spec spec/router_spec.rb`
-0.  `rake spec spec/integration_spec.rb`
+Cool things learned
+===
 
-Run `rake` to run all the spec files.
++ WEBrick, building HTTPResponces and what exactly is in an HTTPRequest.
 
-If you're feeling extra fancy you can run [guard](https://github.com/guard/guard)! 
-just type `guard`
++ How ApplicationController (here called controller_base.rb) deals with rendering and sessions.
+
++ WEBrick::cookies are nice
+
++ parsing params is easy with regular expressions
+
++ the router really ties everything together
+
